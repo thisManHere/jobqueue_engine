@@ -1,12 +1,3 @@
-"""
-tasks.py — your actual business logic goes here. Each function
-takes a single `payload` dict (whatever JSON you passed to enqueue)
-and does real work. Raise an exception to trigger a retry.
-
-Import this module wherever you start a worker so the @task
-decorators run and register these functions.
-"""
-
 import random
 from src.registry import task
 
