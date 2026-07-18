@@ -1,17 +1,4 @@
 """
-dag.py — turns individual jobs into a workflow (a DAG: directed
-acyclic graph of tasks).
-
-The idea:
-  - each task in the workflow is still just a row in `jobs`
-  - a job that depends on others is inserted with status='waiting'
-    instead of 'pending', so workers will never pick it up
-  - `job_dependencies` stores the edges: (child_job_id, parent_job_id)
-  - whenever a job SUCCEEDS, we call unlock_children(): look at every
-    job that listed it as a parent, and for each of those children,
-    check "have ALL of your parents now succeeded?" If yes, flip that
-    child from 'waiting' to 'pending' -- now a worker can pick it up.
-
 This means the DAG needs no separate scheduler or engine process --
 each worker naturally advances the graph as it finishes jobs.
 """
