@@ -1,9 +1,3 @@
-"""
-enqueue_example.py — shows off priority and delayed scheduling.
-
-Run: python -m examples.enqueue_example
-"""
-
 from datetime import datetime, timedelta, timezone
 from src.db import init_pool
 from src.queue import enqueue
