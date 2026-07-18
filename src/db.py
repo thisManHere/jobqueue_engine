@@ -1,15 +1,3 @@
-"""
-db.py — one shared connection pool for the whole app.
-
-We use psycopg3's ConnectionPool so that workers, the scheduler,
-and the DAG resolver don't each open a brand-new TCP connection to
-Postgres every time they touch the database. That's expensive and
-doesn't scale. Instead everyone borrows a connection from this pool
-and gives it back when done.
-
-Docs: https://www.psycopg.org/psycopg3/docs/advanced/pool.html
-"""
-
 import os
 from psycopg_pool import ConnectionPool
 from dotenv import load_dotenv
