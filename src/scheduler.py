@@ -1,16 +1,3 @@
-"""
-scheduler.py — a separate long-running process that turns
-`cron_schedules` rows into actual jobs, on time.
-
-Run exactly one of these per deployment (unlike workers, where you
-want many). Every tick (default every 15s) it asks:
-  "which cron schedules have next_run_at in the past?"
-For each one due, it enqueues a real job AND advances next_run_at
-to the next time the cron expression matches, using croniter.
-
-croniter docs: https://pypi.org/project/croniter/
-"""
-
 import time
 from datetime import datetime, timezone
 from croniter import croniter
