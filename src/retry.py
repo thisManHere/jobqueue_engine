@@ -1,18 +1,3 @@
-"""
-retry.py — what happens when a job's handler raises an exception.
-
-Strategy: exponential backoff with a cap, plus jitter.
-  attempt 1 fails -> retry in  ~2s
-  attempt 2 fails -> retry in  ~4s
-  attempt 3 fails -> retry in  ~8s
-  ... capped at max_backoff_seconds
-
-Jitter (a small random offset) matters at scale: if 1000 jobs all
-failed at the same instant (e.g. a downstream API went down), you
-don't want all 1000 retrying at the exact same millisecond and
-hammering it again. Spreading them out avoids that "thundering herd".
-"""
-
 import random
 from datetime import datetime, timedelta, timezone
 from src.db import pool
