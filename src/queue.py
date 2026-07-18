@@ -1,17 +1,3 @@
-"""
-queue.py — enqueueing jobs and safely dequeueing them for workers.
-
-The core trick for concurrency-safe dequeue is Postgres's
-    SELECT ... FOR UPDATE SKIP LOCKED
-This locks the row(s) it picks, and any other transaction running
-the same query at the same time will simply skip past rows that
-are already locked instead of blocking and waiting. That means
-N workers can poll in parallel and never double-process a job,
-with no extra coordination service (no Redis, no Zookeeper) needed.
-
-Docs on this pattern: https://www.postgresql.org/docs/current/sql-select.html#SQL-FOR-UPDATE-SHARE
-"""
-
 import json
 from datetime import datetime, timezone
 from src.db import pool
