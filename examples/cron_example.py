@@ -1,11 +1,3 @@
-"""
-cron_example.py — registers a recurring job that fires every minute.
-
-Run once to register: python -m examples.cron_example
-Then run the scheduler process separately, forever:
-    python -m examples.run_scheduler
-"""
-
 from src.db import init_pool
 from src.scheduler import add_cron_schedule
 
