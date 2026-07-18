@@ -1,22 +1,3 @@
-"""
-worker.py — the process you run (possibly many copies of!) to
-actually execute jobs.
-
-Loop, forever:
-  1. ask the queue for the next job (dequeue_one)
-  2. if there isn't one, sleep briefly and try again (polling)
-  3. if there is one, look up its handler function by task_name
-     and call it with the job's payload
-  4. on success -> mark_succeeded, then let the DAG resolver
-     unlock any child jobs that were waiting on this one
-  5. on exception -> mark_failed, which schedules a retry or
-     gives up permanently depending on attempts left
-
-You can run several worker processes (even on different machines,
-as long as they point at the same Postgres) for more throughput --
-SKIP LOCKED guarantees they never step on each other.
-"""
-
 import socket
 import time
 import traceback
